@@ -1,0 +1,2 @@
+source /home/soku/esp/awatch_test/build/bootloader/gdbinit/symbols
+source /home/soku/esp/awatch_test/build/bootloader/gdbinit/connect

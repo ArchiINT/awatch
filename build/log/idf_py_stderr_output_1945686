@@ -1,0 +1,27 @@
+Command: /home/soku/.espressif/python_env/idf5.5_py3.14_env/bin/python /home/soku/esp/esp-idf/tools/idf_monitor.py -p /dev/ttyACM0 -b 115200 --toolchain-prefix xtensa-esp32s3-elf- --target esp32s3 --revision 0 /home/soku/esp/awatch_test/build/awatch_test.elf /home/soku/esp/awatch_test/build/bootloader/bootloader.elf -m '/home/soku/.espressif/python_env/idf5.5_py3.14_env/bin/python' '/home/soku/esp/esp-idf/tools/idf.py' '-p' '/dev/ttyACM0'
+[0;33m--- esp-idf-monitor 1.9.0 on /dev/ttyACM0 115200[0m
+[0;33m--- Quit: Ctrl+] | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H[0m
+[0m--- 0x40378b96: [0;33mesp_cpu_wait_for_intr[0m[0m at [0;32m/home/soku/esp/esp-idf/components/esp_hw_support/cpu.c[0m[0m:[1;31m64[0m
+[0m--- 0x403c8700: [0;33m_stext[0m[0m at [0;32m??[0m[0m:[1;31m?[0m
+[0m--- 0x403c8924: [0;33mcall_start_cpu0[0m[0m at [0;32m/home/soku/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c[0m[0m:[1;31m27[0m
+[0m--- 0x42009ab7: [0;33mst7789_fill_color[0m[0m at [0;32m/home/soku/esp/awatch_test/main/awatch_test.c[0m[0m:[1;31m176[0m
+[0m--- 0x40056f5c: [0;33mmemcpy[0m[0m in [0;32mROM[0m
+[0m--- 0x40056f72: [0;33mmemcpy[0m[0m in [0;32mROM[0m
+[0m--- 0x42009ab4: [0;33mst7789_fill_color[0m[0m at [0;32m/home/soku/esp/awatch_test/main/awatch_test.c[0m[0m:[1;31m176[0m
+[0m--- 0x42009b18: [0;33mapp_main[0m[0m at [0;32m/home/soku/esp/awatch_test/main/awatch_test.c[0m[0m:[1;31m201[0m
+[0m--- 0x420167cc: [0;33mmain_task[0m[0m at [0;32m/home/soku/esp/esp-idf/components/freertos/app_startup.c[0m[0m:[1;31m208[0m
+[0m--- 0x4037b6a1: [0;33mvPortTaskWrapper[0m[0m at [0;32m/home/soku/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c[0m[0m:[1;31m139[0m
+[0m--- 0x4037aba0: [0;33mesp_restart_noos[0m[0m at [0;32m/home/soku/esp/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c[0m[0m:[1;31m164[0m
+[0m--- 0x403c8700: [0;33m_stext[0m[0m at [0;32m??[0m[0m:[1;31m?[0m
+[0m--- 0x403c8924: [0;33mcall_start_cpu0[0m[0m at [0;32m/home/soku/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c[0m[0m:[1;31m27[0m
+[0m--- 0x42009ab7: [0;33mst7789_fill_color[0m[0m at [0;32m/home/soku/esp/awatch_test/main/awatch_test.c[0m[0m:[1;31m176[0m
+[0m--- 0x40056f5c: [0;33mmemcpy[0m[0m in [0;32mROM[0m
+[0m--- 0x40056f72: [0;33mmemcpy[0m[0m in [0;32mROM[0m
+[0m--- 0x42009ab4: [0;33mst7789_fill_color[0m[0m at [0;32m/home/soku/esp/awatch_test/main/awatch_test.c[0m[0m:[1;31m176[0m
+[0m--- 0x42009b18: [0;33mapp_main[0m[0m at [0;32m/home/soku/esp/awatch_test/main/awatch_test.c[0m[0m:[1;31m201[0m
+[0m--- 0x420167cc: [0;33mmain_task[0m[0m at [0;32m/home/soku/esp/esp-idf/components/freertos/app_startup.c[0m[0m:[1;31m208[0m
+[0m--- 0x4037b6a1: [0;33mvPortTaskWrapper[0m[0m at [0;32m/home/soku/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c[0m[0m:[1;31m139[0m
+[0m--- 0x4037aba0: [0;33mesp_restart_noos[0m[0m at [0;32m/home/soku/esp/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c[0m[0m:[1;31m164[0m
+[0m--- 0x403c8700: [0;33m_stext[0m[0m at [0;32m??[0m[0m:[1;31m?[0m
+[0m--- 0x403c8924: [0;33mcall_start_cpu0[0m[0m at [0;32m/home/soku/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c[0m[0m:[1;31m27[0m
+[0m
