@@ -1,2 +1,2 @@
-source /home/soku/esp/awatch_test/build/gdbinit/symbols
-source /home/soku/esp/awatch_test/build/gdbinit/connect
+source /home/vi/esp/awatch/build/gdbinit/symbols
+source /home/vi/esp/awatch/build/gdbinit/connect
