@@ -3,6 +3,7 @@ idf_component_register(
         "st7789_init.c"
         "st7789_draw.c"
         "font5x7.c"
+        "fonts.c"
         
     INCLUDE_DIRS "."
     PRIV_REQUIRES 
