@@ -20,3 +20,8 @@ void draw_circle(uint16_t xc, uint16_t yc, uint16_t r, uint16_t color, uint8_t t
 void draw_char(uint16_t x, uint16_t y, char c, FontDef_t *font, uint16_t color, uint16_t bg);
 
 void draw_string(uint16_t x, uint16_t y, const char *str, FontDef_t *font, uint16_t color, uint16_t bg);
+
+void st7789_send_buffer(uint16_t x, uint16_t y, uint16_t ex, uint16_t ey, uint16_t *buffer, int len);
+
+uint16_t next_color(void);
+uint16_t random_color(void);
