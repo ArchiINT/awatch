@@ -1,4 +1,5 @@
 #include "freertos/idf_additions.h"
+#include <math.h>
 #include <st7789_draw.h>
 #include <fonts.h>
 #include <st7789_init.h>
@@ -19,6 +20,9 @@
 //     return Font1[0];
 // }
 
+uint16_t random_color(void);
+uint16_t next_color(void);
+
 const uint16_t* get_char(FontDef_t *font, char c) {
     if (c < 0x20 || c > 0x7F) {
         c = '?';
@@ -28,7 +32,6 @@ const uint16_t* get_char(FontDef_t *font, char c) {
 }
 
 void st7789_draw_pixel(uint16_t x, uint16_t y, uint16_t color){
-    vTaskDelay(pdMS_TO_TICKS(10));
     uint8_t data[4];
     st7789_send_cmd(0x2A);
     // Ex: x is 2 bite (uint16), 300 = 0x012C; first bite = 01, second = 2C;
@@ -83,7 +86,7 @@ void st7789_send_buffer(uint16_t x, uint16_t y, uint16_t ex, uint16_t ey, uint16
 void draw_char(uint16_t x, uint16_t y, char c, FontDef_t *font, uint16_t color, uint16_t bg) {
     
     const uint16_t *ch = get_char(font, c);
-    uint16_t buffer[26][16];
+    uint16_t buffer[font->FontHeight][16];
     //uint16_t swap_color = (color >> 8) | (color << 8);
 
     for (uint8_t row = 0; row < font->FontHeight; row++) {
@@ -116,30 +119,90 @@ void draw_thick_pixel(uint16_t x, uint16_t y, uint16_t color, uint8_t size)
 }
 
 void draw_circle(uint16_t xc, uint16_t yc, uint16_t r, uint16_t color, uint8_t thickness) {
-    int x = 0;
-    int y = r;
-    int d = 3 - 2 * r;
 
-    while (y >= x) {
+    // int x = 0;
+    // int y = r;
+    // int d = 3 - 2 * r;
+    int steps = 8 * r;
 
-        // use thick pixels instead of single pixels
-        draw_thick_pixel(xc + x, yc + y, color, thickness);
-        draw_thick_pixel(xc - x, yc + y, color, thickness);
-        draw_thick_pixel(xc + x, yc - y, color, thickness);
-        draw_thick_pixel(xc - x, yc - y, color, thickness);
+            for (int i = 0; i < steps; i++) {
+                // angle from -π/2
+                float angle = -M_PI / 2.0f + 2.0f * M_PI * i / steps;
 
-        draw_thick_pixel(xc + y, yc + x, color, thickness);
-        draw_thick_pixel(xc - y, yc + x, color, thickness);
-        draw_thick_pixel(xc + y, yc - x, color, thickness);
-        draw_thick_pixel(xc - y, yc - x, color, thickness);
+                int x = xc + (int)roundf(r * cosf(angle));
+                int y = yc + (int)roundf(r * sinf(angle));
 
-        x++;
+                color = next_color();
 
-        if (d > 0) {
-            y--;
-            d += 4 * (x - y) + 10;
-        } else {
-            d += 4 * x + 6;
-        }
+                draw_thick_pixel(x, y, color, thickness);
+            }
+
+    // while (y >= x) {
+        
+    //     draw_thick_pixel(xc + x, yc + y, color, thickness);
+    //     draw_thick_pixel(xc + y, yc + x, color, thickness);
+    //     draw_thick_pixel(xc - y, yc + x, color, thickness);
+    //     draw_thick_pixel(xc - x, yc + y, color, thickness);
+
+    //     draw_thick_pixel(xc - x, yc - y, color, thickness);
+    //     draw_thick_pixel(xc - y, yc - x, color, thickness);
+    //     draw_thick_pixel(xc + y, yc - x, color, thickness);
+    //     draw_thick_pixel(xc + x, yc - y, color, thickness);
+
+    //     if (d > 0) {
+    //         d += 4 * (x - y) + 10;
+    //         y--;
+    //     } else {
+    //         d += 4 * x + 6;
+    //    }
+    //    x++;
+    // }
+
+}
+
+
+    uint16_t random_color(void) {
+    static uint16_t hue = 0;
+    hue = (hue + 137) % 360;  // 137°
+
+    uint8_t h = hue / 60;
+    uint8_t f = (hue % 60) * 255 / 60;
+    uint8_t q = 255 - f;
+
+    uint8_t r, g, b;
+    switch (h) {
+        case 0: r=255; g=f;   b=0;   break;
+        case 1: r=q;   g=255; b=0;   break;
+        case 2: r=0;   g=255; b=f;   break;
+        case 3: r=0;   g=q;   b=255; break;
+        case 4: r=f;   g=0;   b=255; break;
+        case 5: r=255; g=0;   b=q;   break;
+        default: r=0; g=0; b=0; break;
     }
+
+    return ((r >> 3) << 11) | ((g >> 2) << 5) | (b >> 3);
+}
+
+uint16_t next_color(void) {
+    static uint16_t hue = 0;
+    hue += 4;
+    if (hue >= 360) hue -= 360;
+
+    // HSV → RGB565 (S=1, V=1 — чистые насыщенные цвета)
+    uint8_t h = hue / 60;
+    uint8_t f = (hue % 60) * 255 / 60;
+    uint8_t q = 255 - f;
+
+    uint8_t r, g, b;
+    switch (h) {
+        case 0: r=255; g=f;   b=0;   break;
+        case 1: r=q;   g=255; b=0;   break;
+        case 2: r=0;   g=255; b=f;   break;
+        case 3: r=0;   g=q;   b=255; break;
+        case 4: r=f;   g=0;   b=255; break;
+        case 5: r=255; g=0;   b=q;   break;
+        default: r=0; g=0; b=0; break;
+    }
+
+    return ((r >> 3) << 11) | ((g >> 2) << 5) | (b >> 3);
 }
