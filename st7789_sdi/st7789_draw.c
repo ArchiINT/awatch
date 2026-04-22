@@ -86,9 +86,10 @@ void st7789_send_buffer(uint16_t x, uint16_t y, uint16_t ex, uint16_t ey, uint16
 void draw_char(uint16_t x, uint16_t y, char c, FontDef_t *font, uint16_t color, uint16_t bg) {
     
     const uint16_t *ch = get_char(font, c);
-    uint16_t buffer[font->FontHeight][16];
-    //uint16_t swap_color = (color >> 8) | (color << 8);
-
+    uint16_t buffer[font->FontHeight][font->FontWidth];
+    color = (color >> 8) | (color << 8);
+    bg = (bg >> 8) | (bg << 8);
+    
     for (uint8_t row = 0; row < font->FontHeight; row++) {
         for (uint8_t col = 0; col < font->FontWidth; col++) {
             buffer[row][col] = ((ch[row] >> (15 - col)) & 0x01) ? color : bg;

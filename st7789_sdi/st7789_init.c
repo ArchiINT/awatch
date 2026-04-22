@@ -98,7 +98,7 @@ void st7789_init(){
     st7789_send_data(&data, 1);
 
     // Inversion
-    //st7789_send_cmd(0x21);
+    st7789_send_cmd(0x21);
 
     // Normal display mode
     st7789_send_cmd(0x13);

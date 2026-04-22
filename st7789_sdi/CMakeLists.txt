@@ -2,8 +2,9 @@ idf_component_register(
     SRCS 
         "st7789_init.c"
         "st7789_draw.c"
-        "font5x7.c"
         "fonts.c"
+        "style.c"
+        "wifi_conn.c"
         
     INCLUDE_DIRS "."
     PRIV_REQUIRES 
@@ -11,4 +12,6 @@ idf_component_register(
         esp_driver_spi
         freertos
         hal
+        esp_wifi
+        nvs_flash
 )
