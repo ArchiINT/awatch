@@ -10,6 +10,7 @@
 #include "string.h"
 #include <wifi_conn.h>
 #include <esp_sntp.h>
+
 #define BG_COLOR 0x3a08
 
 #define SCREEN_HEIGHT 280
@@ -26,7 +27,7 @@ static void initialize_sntp(void)
 
     // Ждём синхронизации (макс 10 секунд)
     int retry = 0;
-    const int max_retry = 20;
+    const int max_retry = 1;
     while (sntp_get_sync_status() == SNTP_SYNC_STATUS_RESET && retry < max_retry) {
         ESP_LOGI(TAG, "Waiting for NTP sync... (%d/%d)", retry + 1, max_retry);
         vTaskDelay(pdMS_TO_TICKS(500));
@@ -39,6 +40,7 @@ static void initialize_sntp(void)
         ESP_LOGW(TAG, "NTP sync failed, time may be incorrect");
     }
 }
+
 
 void app_main(void)
 {
@@ -55,7 +57,7 @@ void app_main(void)
     st7789_fill_color(BG_COLOR);
 
     //draw_string(50, 50, "HELLO!", &Font_16x26, 0xFFFF, 0x0000);
-
+    draw_icon(&Battery, BG_COLOR, 0xF800);
     time_t now;
     struct tm timeinfo;
     char strftime_buf[64];

@@ -11,7 +11,7 @@ static const char *TAG = "wifi_sta";
 
 #define STA_SSID      "Nonono"
 #define STA_PASSWORD  "beginer2"
-#define MAX_RETRY     5
+#define MAX_RETRY     1
 
 static EventGroupHandle_t s_wifi_event_group;
 #define WIFI_CONNECTED_BIT BIT0

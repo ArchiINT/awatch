@@ -1,4 +1,5 @@
 #include "fonts.h"
+#include "icons.h"
 #include <stdint.h>
 #include <sys/types.h>
 
@@ -8,6 +9,8 @@ void st7789_draw_pixel(uint16_t x, uint16_t y, uint16_t color);
 const uint16_t* get_char(FontDef_t *font ,char c);
 
 const uint8_t* st7789_get_char(char c);
+
+void draw_icon(IconDef_t *battery, uint16_t bg, uint16_t color);
 
 void st7789_draw_char(uint16_t x, uint16_t y, uint16_t color);
 

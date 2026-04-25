@@ -82,6 +82,18 @@ void st7789_send_buffer(uint16_t x, uint16_t y, uint16_t ex, uint16_t ey, uint16
 
 }
 
+void draw_icon(IconDef_t *battery, uint16_t bg, uint16_t color){
+    const uint16_t *icon = battery->data;
+    uint16_t buffer[32][32];
+    color = (color >> 8) | (color << 8);
+
+    for (int row = 0; row < 32; row++) {
+        for (int col = 0; col<32; col++) {
+            buffer[row][col] = icon[row * 32 + col] ? color : bg;
+        }
+    }
+    st7789_send_buffer(20, 20, 20+32, 20+32, *buffer, 32*32);
+}
 
 void draw_char(uint16_t x, uint16_t y, char c, FontDef_t *font, uint16_t color, uint16_t bg) {
     

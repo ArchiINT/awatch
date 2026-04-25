@@ -5,6 +5,7 @@ idf_component_register(
         "fonts.c"
         "style.c"
         "wifi_conn.c"
+        "icons.c"
         
     INCLUDE_DIRS "."
     PRIV_REQUIRES 
