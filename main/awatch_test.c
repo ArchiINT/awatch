@@ -57,7 +57,7 @@ void app_main(void)
     st7789_fill_color(BG_COLOR);
 
     //draw_string(50, 50, "HELLO!", &Font_16x26, 0xFFFF, 0x0000);
-    draw_icon(&Battery, BG_COLOR, 0xF800);
+    draw_icon(&Battery, BG_COLOR, 0xad55);
     time_t now;
     struct tm timeinfo;
     char strftime_buf[64];
