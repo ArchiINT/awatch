@@ -5,19 +5,12 @@
 #include "esp_log.h"
 #include "esp_wifi.h"
 #include "nvs_flash.h"
-static const char *TAG = "wifi_sta";
 
-#define STA_SSID      "Nonono"
-#define STA_PASSWORD  "beginer2"
-#define MAX_RETRY     5
 
-static EventGroupHandle_t s_wifi_event_group;
-#define WIFI_CONNECTED_BIT BIT0
-#define WIFI_FAIL_BIT      BIT1
+esp_err_t tutorial_init(void);
 
-static int s_retry_count = 0;
+esp_err_t tutorial_connect(char* wifi_ssid, char* wifi_password);
 
-static void wifi_event_handler(void *arg, esp_event_base_t event_base,
-                               int32_t event_id, void *event_data);
+esp_err_t tutorial_disconnect(void);
 
-void wifi_connection();
+esp_err_t tutorial_deinit(void);

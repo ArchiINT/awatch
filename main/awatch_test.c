@@ -12,6 +12,7 @@
 #include <esp_sntp.h>
 
 #define BG_COLOR 0x3a08
+#define TAG "Wifi"
 
 #define SCREEN_HEIGHT 280
 #define SCREEN_WIDTH  240
@@ -44,7 +45,9 @@ static void initialize_sntp(void)
 
 void app_main(void)
 {
-    wifi_connection();
+    tutorial_init();
+    tutorial_connect("Nonono", "Beginer2");
+   
     st7789_init_spi();     // SPI START
     st7789_backlight_on();
     st7789_init();

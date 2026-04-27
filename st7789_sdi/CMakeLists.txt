@@ -15,4 +15,5 @@ idf_component_register(
         hal
         esp_wifi
         nvs_flash
+        esp_event
 )
